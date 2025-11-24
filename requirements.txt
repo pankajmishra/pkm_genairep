@@ -1,0 +1,12 @@
+fastapi
+uvicorn[standard]
+requests
+pdfminer.six
+sentence-transformers
+faiss-cpu
+torch
+python-multipart
+pydantic
+anyio
+openai
+streamlit
