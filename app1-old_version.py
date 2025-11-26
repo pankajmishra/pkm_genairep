@@ -38,9 +38,6 @@ if 'account_id' not in st.session_state:
     st.session_state.account_id = "acct_123"  # Default for demo
 if 'authenticated' not in st.session_state:
     st.session_state.authenticated = True  # Default for demo
-# Track previous account to detect changes and clear session state accordingly
-if 'prev_account_id' not in st.session_state:
-    st.session_state.prev_account_id = st.session_state.account_id
 
 def chunk_text(text, chunk_size=CHUNK_SIZE, overlap=OVERLAP):
     """Chunk text with overlap."""
@@ -180,7 +177,7 @@ def initialize_retrievers():
 # Streamlit UI
 st.set_page_config(page_title="iMitra", page_icon="🏦", layout="wide")
 
-st.title("🏦 Bank-iMitra System")
+st.title("🏦 Your-Bank-iMitra")
 st.markdown("Upload PDF documents and query them with AI-powered answers and citations")
 
 # Sidebar for document upload
@@ -247,20 +244,8 @@ if st.session_state.index_loaded and orchestrator_available:
     
     # Account settings (for actions)
     with st.expander("⚙️ Account Settings"):
-        # Use text_input to let user change account_id; update session state accordingly
         st.session_state.account_id = st.text_input("Account ID", value=st.session_state.account_id, key="account_id_input")
         st.session_state.authenticated = st.checkbox("Authenticated", value=st.session_state.authenticated, key="auth_checkbox")
-    
-    # Detect account change and clear session-specific loaded data so new account is considered
-    if st.session_state.account_id != st.session_state.prev_account_id:
-        # update previous account marker
-        st.session_state.prev_account_id = st.session_state.account_id
-        # clear current in-memory index/retriever/uploaded files so user can ingest for the new account
-        st.session_state.index_loaded = False
-        st.session_state.retriever = None
-        st.session_state.uploaded_files = []
-        st.session_state.selected_example = None
-        st.info(f"Account changed to {st.session_state.account_id}. Cleared loaded index and uploaded files for this session. Please ingest documents for the new account.")
     
     # Query input
     query = st.text_input(
@@ -387,3 +372,4 @@ elif not orchestrator_available:
     st.info("Also ensure `server_fastapi.py` is running on port 8001: `uvicorn server_fastapi:app --port 8001`")
 else:
     st.info("👆 Please upload and ingest at least one PDF document using the sidebar to start querying.")
+
