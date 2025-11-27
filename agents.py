@@ -30,7 +30,7 @@ def redact_pii(text):
 from openai import OpenAI
 import os
 
-client = OpenAI(api_key="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")
+client = OpenAI(api_key="sk-proj-lR1X8Cc8j-WKvikXvVdlOTXzCtnOsoVM47QNLAy6Iuuz006F-X1JkC45VCEsXL4WWukVhwgiU4T3BlbkFJqO_FWL_lw5iu0rLCd2mlxauuIpalGJzWcvGnAJNLcQI7lBJ8g__1eplnMx5_slUP9ORZ9")
 
 def call_llm(prompt: str):
     """

@@ -17,10 +17,11 @@ This repository is a Proof-of-Concept for a multimodal bank customer chatbot wit
 6. After initial setup use `conda activate bankmcpnew` to switch to environment
 6. Start mock banking API: `uvicorn server_fastapi:app --port 8001 --reload`
 7. Start orchestrator: `uvicorn server_orchestrator:app --port 8000 --reload`
-8. Test with curl / Postman to POST `/chat`
+8. Test with curl / Postman to POST `/chat` => `http://127.0.0.1:8000/chat`
 9. Start the streamlit server `streamlit run app.py`
 10. Access Streamlit API through : http://localhost:8501/
 
+# Note: For API Key in agents.py -> Consider reaching owner of repo to run. Or use your own Open API Key to run the project.
 ## Access doc of FastAPI-with Banking Transaction URL: 
 http://127.0.0.1:8001/docs
 
